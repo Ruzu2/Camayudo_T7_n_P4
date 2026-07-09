@@ -91,9 +91,48 @@ function substract() {
 }
 
 /*dark mode*/
+function applyDarkTheme() {
+    document.body.classList.add("dark");
+    document.querySelector("header")?.classList.add("dark");
+    document.querySelector("footer").classList.add("dark");
+    document.querySelector("form")?.classList.add("dark");
+    document.querySelector("nav").classList.add("dark");
+    document.querySelector("ul")?.classList.add("dark");
+    document.querySelector("p")?.classList.add("dark");
+
+    document.querySelectorAll("a").forEach(link => {
+        link.classList.add("dark");
+    });
+}
+
+function removeDarkTheme() {
+    document.body.classList.remove("dark");
+    document.querySelector("header")?.classList.remove("dark");
+    document.querySelector("footer").classList.remove("dark");
+    document.querySelector("form")?.classList.remove("dark");
+    document.querySelector("nav").classList.remove("dark");
+    document.querySelector("ul")?.classList.remove("dark");
+    document.querySelector("p")?.classList.remove("dark");
+
+    document.querySelectorAll("a").forEach(link => {
+        link.classList.remove("dark");
+    });
+}
+
 function theme() {
-    document.body.classList.toggle("dark");
-    document.querySelector("header").classList.toggle("dark");
-    document.querySelector("footer").classList.toggle("dark");
-    document.querySelector("form").classList.toggle("dark");
-};
+    if (document.body.classList.contains("dark")) {
+        removeDarkTheme();
+        localStorage.setItem("theme", "light");
+    } else {
+        applyDarkTheme();
+        localStorage.setItem("theme", "dark");
+    }
+}
+
+window.onload = function () {
+    if (localStorage.getItem("theme") === "dark") {
+        applyDarkTheme();
+
+        document.getElementById("themebutton").checked = true;
+    }
+}
